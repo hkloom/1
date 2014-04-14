@@ -1,0 +1,25 @@
+{
+  "name": "art_site",
+  "version": "0.0.0",
+  "description": "math art creator",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "~1.0.0",
+    "express": "~4.0.0",
+    "mongo": "~0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hkloom/1.git"
+  },
+  "author": "Tai Rodrig",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hkloom/1/issues"
+  },
+  "homepage": "https://github.com/hkloom/1"
+}
