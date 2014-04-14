@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+app.use(logfmt.requestLogger());
 app.engine('html', require('ejs').renderFile);
 
 app.get('/challenge/:number', function(req,res){
