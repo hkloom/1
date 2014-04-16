@@ -12,7 +12,7 @@ db.open(function(err,client){
 	client.authenticate('heroku_app24135520','osoke5ha3189i78benpm0r6l2c',function(err,success){
 		var subs = db.collection("subs");
 		console.log(subs);
-		subs.insert({"test":"boobs"},{w: 1},function(err,records){
+		subs.insert({test:"shoe"},{w: 1},function(err,records){
 			console.log("Record added: "+records[0]._id);
 		});
 	});
