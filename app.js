@@ -22,13 +22,25 @@ app.use(logfmt.requestLogger());
 app.engine('html', require('ejs').renderFile);
 
 app.get('/challenge/:number', function(req,res){
-  var num =  req.params.number;
-  res.render("index.html",
-  	{
-  		title: "Page # "+num+"!",
-  		field1: "Once",
-  		field2: "Thrice"
-  	});
+	var cursor;
+		var subs = db.collection("subs");
+		console.log(subs);
+		var items;
+		subs.find({test: "shoe"}).toArray(function(err,items){
+           if(err) (function(err){})(err);
+           else (function(items){
+           		console.log(items);
+           })(items);
+        });
+	console.log(items);
+	//var first_doc = cursor.next();
+	//console.log(first_doc);
+  	var num =  req.params.number;
+  	res.render("index.html",
+  		{	title: "Page "+num+"",
+  			field1: "Forthemore",//first_doc.test,
+  			field2: "Thrice"
+  		});
 });
 
 var port = process.env.PORT || 5000;
