@@ -1,6 +1,6 @@
 var express = require('express');
 var logfmt = require('logfmt');
-var df = require('/js/dbface.js');
+var df = require('./public/js/dbface.js');
 var app = express();
 
 df.open();

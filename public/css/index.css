@@ -1,12 +1,36 @@
-	/* make footer stick to bottom of page */
 	* {
-	  	margin: 20;
 	  	font-family: Georgia;
 	  	text-align: center;
 	}
 	html {
-	  	background: #CCD49D;
+	  	background-image:url("../cone4.jpg");
+	  	background-position:center; 
 	}
-	body{
-		background: #FFFFFF;
+	h3{
+		color: #FFFFFF;
+		font-family: Georgia;
+		font-size: xx-large;
+	}
+	div{
+		background-color:transparent;
+	}
+	body {
+		margin-top: 2cm;
+		font-family: Georgia;
+    	background-color:transparent;
+		padding-bottom: 2%;
+		overflow:auto;
+		margin-bottom: 2cm;
+	}
+	.row{
+		background-color:transparent;
+		border-width: 3;
+		margin-top: 2px;
+	}
+	.container{
+		background-color:transparent;
+		overflow:auto;
+	}
+	.clear {
+  		clear: both;
 	}

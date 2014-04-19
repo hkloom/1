@@ -11,6 +11,36 @@
     <link href="/css/bootstrap.css" rel="stylesheet" />
     <link href="/css/index.css" rel="stylesheet" />
 
+
+</head>
+<body>
+  <h3>phase</h3> 
+</br>
+</br>
+    <div class="container table"></div>
+</body>
+<script type="text/javascript">
+		//get the data
+		var json = <%- JSON.stringify(items) %>;
+		//$(".inside").append("items = "+json.toString());
+		for (var i = 0; i< json.length; i++){
+			if (i%3==0){ //start row
+				$(".table").append("<div class = 'row'>");
+			}
+			$(".table").append("<div class='col-md-4'><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></div>");
+			if (i%3==2){ //end row
+				$(".table").append("</div>");
+			}
+			var system = json[i];
+			alert("system= "+system);
+			var canvas = document.getElementById("canvas"+i);
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+			ctx.fillStyle = "#FFFF00";
+			ctx.rect(10,10,300,300);
+			ctx.fill();
+		}
+</script>
     <!-- To better visualize the columns -->
     <style>
     .row > div {
@@ -18,53 +48,4 @@
         box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;
     }
     </style>
-
-</head>
-<body>
-	<script type="text/javascript">
-		//get the data
-		var json = <%- JSON.stringify(items) %>;
-		//$(".inside").append("items = "+json.toString());
-	</script>
-<div class="page-header">
-  <h1>Example page header <small>Subtext for header</small></h1>
-</div>
- 
-    <div class="container">
-
-        <h1>Hello, world!</h1>
-
-        <div class="row">
-
-            <div class="col-md-3">
-                <p>Asymmetrical YOLO banjo lomo fanny pack, shoreditch flexitarian dreamcatcher ethnic kitsch sriracha nisi sustainable swag. Cliche 90's farm-to-table master cleanse Pinterest jean shorts. Cillum raw denim aesthetic sunt.</p>
-            </div>
-
-            <div class="col-md-9">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>Consectetur art party Tonx culpa semiotics. Pinterest assumenda minim organic quis.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Consectetur art party Tonx culpa semiotics. Pinterest assumenda minim organic quis.</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>Wayfarers selvage YOLO, commodo assumenda eu est bespoke mlkshk. Helvetica reprehenderit iPhone, aesthetic 90's literally chambray bicycle rights viral blog voluptate. Occupy bespoke stumptown duis keytar vero.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Wayfarers selvage YOLO, commodo assumenda eu est bespoke mlkshk. Helvetica reprehenderit iPhone, aesthetic 90's literally chambray bicycle rights viral blog voluptate. Occupy bespoke stumptown duis keytar vero.</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</body>
-
 </html>
