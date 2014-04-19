@@ -1,7 +1,6 @@
 var express = require('express');
 var logfmt = require('logfmt');
-var engine = require('ejs-locals');
-var df = require('./dbface.js');
+var df = require('/js/dbface.js');
 var app = express();
 
 df.open();
