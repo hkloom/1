@@ -35,20 +35,17 @@ var add = function(system){
 	);
 };
 
-var find = function(template){
-		var subs = db.collection("subs");
-		console.log(subs);
-		var items;
-		subs.find(template).toArray(function(err,items){
-           if(err) (function(err){
-           		console.log(err);
-           })(err);
-           else (function(items){
-           		console.log(items);
-           })(items);
-        });
-        return items;
-};
+var find = function(template,success){
+	var subs = db.collection("subs");
+	console.log(subs);
+	var items;
+	subs.find(template).toArray(function(err,items){
+       if(err) (function(err){
+       		console.log(err);
+       })(err);
+       else success(items);
+    });
+}
 
 module.exports.open = open;
 module.exports.add = add;

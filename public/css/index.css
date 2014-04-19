@@ -1,0 +1,12 @@
+	/* make footer stick to bottom of page */
+	* {
+	  	margin: 20;
+	  	font-family: Georgia;
+	  	text-align: center;
+	}
+	html {
+	  	background: #CCD49D;
+	}
+	body{
+		background: #FFFFFF;
+	}

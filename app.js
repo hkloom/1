@@ -1,19 +1,26 @@
 var express = require('express');
 var logfmt = require('logfmt');
+var engine = require('ejs-locals');
 var df = require('./dbface.js');
 var app = express();
 
 df.open();
 
+
+app.use(express.static(__dirname + '/public'));
 app.use(logfmt.requestLogger());
 app.engine('html', require('ejs').renderFile);
 app.get('/challenge/:number', function(req,res){
   	var num =  req.params.number;
-  	res.render("index.html",
-  		{	title: "Page "+num+"",
-  			field1: "Forthemore",//first_doc.test,
-  			field2: df.find({test:"boobs"})
-  		});
+  	df.find({test: "shoe"},function(items){
+  		res.render("index.html",
+  			{	
+  				title: num+" -- "+num+" -- "+num+" -- "+num+" -- "+num,
+  				items: items
+  			}
+  		);
+  	});
+  	
 });
 
 var port = process.env.PORT || 5000;
