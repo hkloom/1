@@ -45,7 +45,14 @@
 	    	$('.box').each(function(i) {
 	        	$(this).attr({id: "div"+i});
 	        	$(this).click(function(){
-	        		alert("clicked on div "+i);
+	        		var posting = $.post( "/edit", { d: "data" } );
+	        		alert("clicked on id "+json[i]._id);
+				    // Put the results in a div
+				    posting.done(function( data ) {
+				    	alert("done sending data");
+				      //var content = $( data ).find( "#content" );
+				      //$( "#result" ).empty().append( content );
+				    });
 	        	})
 	    	});
 		});
