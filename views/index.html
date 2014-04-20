@@ -19,7 +19,8 @@
 </br>
     <div class="container table"></div>
 </body>
-<script type="text/javascript">
+<script>
+
 		//get the data
 		var json = <%- JSON.stringify(items) %>;
 		//$(".inside").append("items = "+json.toString());
@@ -27,12 +28,12 @@
 			if (i%3==0){ //start row
 				$(".table").append("<div class = 'row'>");
 			}
-			$(".table").append("<div class='col-md-4'><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></div>");
+			$(".table").append("<div class='col-md-4 box' id><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></div>");
 			if (i%3==2){ //end row
 				$(".table").append("</div>");
 			}
 			var system = json[i];
-			alert("system= "+system);
+			//alert("system= "+system);
 			var canvas = document.getElementById("canvas"+i);
 			var ctx = canvas.getContext('2d');
 			ctx.beginPath();
@@ -40,12 +41,13 @@
 			ctx.rect(10,10,300,300);
 			ctx.fill();
 		}
+		$(function() {
+	    	$('.box').each(function(i) {
+	        	$(this).attr({id: "div"+i});
+	        	$(this).click(function(){
+	        		alert("clicked on div "+i);
+	        	})
+	    	});
+		});
 </script>
-    <!-- To better visualize the columns -->
-    <style>
-    .row > div {
-        background-color: #dedef8;
-        box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;
-    }
-    </style>
 </html>
