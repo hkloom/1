@@ -20,10 +20,10 @@
 </body>
 <canvas width = '700' height = '700' id = 'canvas'></canvas>
 
-<script type="text/javascript">
+<script>
 	//get the data
 	var json = <%- JSON.stringify(system) %>;
-	alert("system= "+json.toString());
+	console.log(json);
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 	ctx.beginPath();

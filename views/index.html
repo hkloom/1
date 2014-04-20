@@ -17,6 +17,7 @@
   <h3>phase</h3> 
 </br>
 </br>
+	<div id="result"></div>
     <div class="container table"></div>
 </body>
 <script>
@@ -28,7 +29,7 @@
 			if (i%3==0){ //start row
 				$(".table").append("<div class = 'row'>");
 			}
-			$(".table").append("<div class='col-md-4 box' id><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></div>");
+			$(".table").append("<div class='col-md-4 box'><form action = '/edit' method = 'post' class = 'f'><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></form></div>");
 			if (i%3==2){ //end row
 				$(".table").append("</div>");
 			}
@@ -37,7 +38,7 @@
 			var canvas = document.getElementById("canvas"+i);
 			var ctx = canvas.getContext('2d');
 			ctx.beginPath();
-			ctx.fillStyle = "#FFFF00";
+			ctx.fillStyle = "#FFFFFF";
 			ctx.rect(10,10,300,300);
 			ctx.fill();
 		}
@@ -45,16 +46,22 @@
 	    	$('.box').each(function(i) {
 	        	$(this).attr({id: "div"+i});
 	        	$(this).click(function(){
-	        		var posting = $.post( "/edit", { d: "data" } );
 	        		alert("clicked on id "+json[i]._id);
-				    // Put the results in a div
-				    posting.done(function( data ) {
-				    	alert("done sending data");
-				      //var content = $( data ).find( "#content" );
-				      //$( "#result" ).empty().append( content );
-				    });
-	        	})
+	        		$.post('/edit', {test: "baby"}).success(function(data){
+	        				$('.f').submit();
+	        			}
+	        		);
+	        		//var thumbs = $(".table").replaceWith("<p>TEST</p>");
+	        	});
 	    	});
+	    	/*
+	    	$('.f').each(function(i) {
+					//$(this).attr({})	
+					$(this).click(function(){
+
+					});
+				}); */
+			
 		});
 </script>
 </html>
