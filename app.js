@@ -26,11 +26,12 @@ app.route('/')
 
 app.route('/edit')
 .post( function(req,res){
+    console.log("Unserialized request: " + JSON.stringify(req.body, null, 4));
     console.log("on edit page");
       res.render("system.html",
         { 
           title: "EDIT",
-          system: {test:"baby"}
+          system: req.body
         }
       );
     });

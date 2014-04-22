@@ -2,6 +2,7 @@
 <html>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.redirect.min.js"></script>
 
 <head>
 	<title><%= title %></title>
@@ -29,7 +30,7 @@
 			if (i%3==0){ //start row
 				$(".table").append("<div class = 'row'>");
 			}
-			$(".table").append("<div class='col-md-4 box'><form action = '/edit' method = 'post' class = 'f'><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></form></div>");
+			$(".table").append("<div class='col-md-4 box'><canvas width ='300' height = '300' id = 'canvas"+i+"'></canvas></div>");
 			if (i%3==2){ //end row
 				$(".table").append("</div>");
 			}
@@ -46,21 +47,9 @@
 	    	$('.box').each(function(i) {
 	        	$(this).attr({id: "div"+i});
 	        	$(this).click(function(){
-	        		alert("clicked on id "+json[i]._id);
-	        		$.post('/edit', {test: "baby"}).success(function(data){
-	        				$('.f').submit();
-	        			}
-	        		);
-	        		//var thumbs = $(".table").replaceWith("<p>TEST</p>");
+	        		$().redirect('/edit',json[i]);
 	        	});
 	    	});
-	    	/*
-	    	$('.f').each(function(i) {
-					//$(this).attr({})	
-					$(this).click(function(){
-
-					});
-				}); */
 			
 		});
 </script>
