@@ -14,7 +14,7 @@ app.use(bp());
 app.route('/')
 .get( function(req,res){
     console.log("on index page");
-  	df.find({test: "shoe"},function(items){
+  	df.find({title: "my masterpiece"},{title: 1, dx: 1, dy: 1},function(items){
   		res.render("index.html",
   			{	
   				title: "VIEW",
@@ -30,7 +30,7 @@ app.route('/edit')
     console.log("on edit page");
       res.render("system.html",
         { 
-          title: "EDIT",
+          title: req.body.test,
           system: req.body
         }
       );

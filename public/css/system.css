@@ -2,3 +2,13 @@
 	  	font-family: Georgia;
 	  	text-align: center;
 	}
+	h3{
+		font-family: Georgia;
+		font-size: 36px;
+	}
+	html, body{
+		background-color: #E8E7E1;
+	}
+	.equation{
+		width: 500px;
+	}

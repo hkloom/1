@@ -14,12 +14,27 @@
 
 </head>
 <body>
-  <h3>phase</h3> 
-</br>
+  <h3><%= title %></h3> 
 </br>
 </body>
 <canvas width = '650' height = '650' id = 'canvas'></canvas>
-
+<div id = "controls" align = "center">
+	<form id = "input">
+		<label for ="dx"> dx = </label>
+		<input id = "dx" type = "text" class = "equation" value = "<%= system.dx %>">
+		</br>
+		<label for ="dy"> dy = </label>
+		<input id = "dy" type = "text" class = "equation" value = "<%= system.dy %>">
+		</br>
+		<script>
+			s = "";
+			for (var i=0; i<5;i++){
+				s += '<input class="color"  value = "'+i+'" id = "color'+i+'">';
+			}
+			document.write(s);
+		</script>
+	</form>
+</div>
 <script>
 	//get the data
 	var json = <%- JSON.stringify(system) %>;
@@ -27,7 +42,7 @@
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 	ctx.beginPath();
-	ctx.fillStyle = "#FFF000";
+	ctx.fillStyle = "#FFFFFF";
 	ctx.rect(0,0,650,650);
 	ctx.fill();
 </script>

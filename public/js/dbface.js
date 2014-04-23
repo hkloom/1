@@ -35,11 +35,11 @@ var add = function(system){
 	);
 };
 
-var find = function(template,success){
+var find = function(template,projection,success){
 	var subs = db.collection("subs");
 	console.log(subs);
 	var items;
-	subs.find(template).toArray(function(err,items){
+	subs.find(template,projection).toArray(function(err,items){
        if(err) (function(err){
        		console.log(err);
        })(err);
