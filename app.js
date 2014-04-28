@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(logfmt.requestLogger());
 app.engine('html', require('ejs').renderFile);
 app.use(bp());
+
 app.route('/')
 .get( function(req,res){
     console.log("on index page");
@@ -37,9 +38,9 @@ app.route('/edit')
       );
     });
 
-app.route('/pixi')
+app.route('/dicks')
 .get( function(req,res){
-      res.render("system_pixi.html");
+      res.render("interactive_dicks.html");
     });
 
 var port = process.env.PORT || 5000;
