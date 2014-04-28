@@ -3,11 +3,11 @@
 	  	text-align: center;
 	}
 	html {
-		background-image: url("../cone4.jpg");
+		background-color: #E8E7E1;
 	  	background-position:center; 
 	}
 	h3{
-		color: #FFFFFF;
+		color: #444444;
 		font-family: Georgia;
 		font-size: xx-large;
 	}
