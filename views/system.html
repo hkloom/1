@@ -2,6 +2,8 @@
 <html>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/drawfuncs.js"></script>
+
 
 <head>
 	<title><%= title %></title>
@@ -11,39 +13,64 @@
     <link href="/css/bootstrap.css" rel="stylesheet" />
     <link href="/css/system.css" rel="stylesheet" />
 
-
-</head>
-<body>
-  <h3><%= title %></h3> 
-</br>
-</body>
-<canvas width = '650' height = '650' id = 'canvas'></canvas>
-<div id = "controls" align = "center">
-	<form id = "input">
-		<label for ="dx"> dx = </label>
-		<input id = "dx" type = "text" class = "equation" value = "<%= system.dx %>">
-		</br>
-		<label for ="dy"> dy = </label>
-		<input id = "dy" type = "text" class = "equation" value = "<%= system.dy %>">
-		</br>
-		<script>
-			s = "";
-			for (var i=0; i<5;i++){
-				s += '<input class="color"  value = "'+i+'" id = "color'+i+'">';
-			}
-			document.write(s);
-		</script>
-	</form>
-</div>
 <script>
 	//get the data
 	var json = <%- JSON.stringify(system) %>;
+	var Colors = <%- JSON.stringify(system.colors) %>;
 	console.log(json);
+	console.log(Colors);
+</script>
+</head>
+<body>
+  <h3 contenteditable="true"><%= title %></h3> 
+</br>
+</body>
+<div class = "canvas"></div>
+<div id = "controls" align = "center">
+	<form id = "input">
+		<label for ="dx"> &#916x = </label>
+		<input id = "dx" type = "text" class = "equation" value = "<%= system.dx %>">
+		</br>
+		<label for ="dy"> &#916y = </label>
+		<input id = "dy" type = "text" class = "equation" value = "<%= system.dy %>">
+		</br>
+		<script>
+			//console.log("colors = "+json.colors+"\nlength = "+json.colors.length);
+			//var colors = JSON.parse(json.colors);
+			//console.log("colors = "+colors+"\nlength = "+colors.length);
+			s = "";
+			for (var i=0; i<5;i++){//json.colors.length;i++){
+				s += '<input class="color"  value = "#000000" id = "color'+i+'">';
+			}
+			document.write(s);
+		</script>
+		</br>
+		</br>
+		<input type = "submit" value = "+++++++++++++++++++++++++++++++++++" id = "draw">
+	</form>
+</div>
+<script>
+	//dynamically create the canvas
+	var canvas = document.createElement('canvas');
+	canvas.id     = 'canvas';
+	canvas.width = window.innerWidth*0.6;
+	canvas.height = window.innerHeight*0.6;
+	canvas.style.border   = "1px solid";
+	$('.canvas').append(canvas);
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 	ctx.beginPath();
 	ctx.fillStyle = "#FFFFFF";
 	ctx.rect(0,0,650,650);
 	ctx.fill();
+
+	$(function(){
+		$("#draw").click(function(e){
+			console.log("click");
+			e.preventDefault();
+			draw();
+		});
+	});
+
 </script>
 </html>
