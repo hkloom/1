@@ -24,28 +24,30 @@
     // add the renderer view element to the DOM
     document.body.appendChild(renderer.view);
  
-    requestAnimFrame( animate );
+    var list = [];
+    for(var k = 0; k < 100; k++){
+    	list[k] = {x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, color:(Math.random()*0xFFFFFF<<0), g: new PIXI.Graphics()};
+		list[k].g.beginFill(list[k].color, 1);    	
+		list[k].g.drawCircle(list[k].x,list[k].y,5);
+		list[k].g.endFill();
+		stage.addChild(list[k].g);
+    }
 
-	var graphics = new PIXI.Graphics();
-	graphics.beginFill(0xFF700B, 1);
-	graphics.drawCircle(window.innerWidth/2, window.innerHeight/2,100);
-	graphics.endFill();	
-	stage.addChild(graphics);
+    requestAnimFrame( animate );
 
     function animate() {
  
         requestAnimFrame( animate );
- 		for (var i = 0; i < 500; i++){
- 			var x = Math.random()*window.innerWidth;
- 			var y = Math.random()*window.innerHeight;
- 			var graphics = new PIXI.Graphics();
-			graphics.beginFill(0xFF700B, 1);
-			graphics.drawCircle(x, y,1);
-			graphics.endFill();	
-			stage.addChild(graphics);
- 		}
-        // render the stage   
-        renderer.render(stage);
+        for (var i = 0; i < list.length; i++){
+        	list[i].x += 2;
+        	list[i].y += 3;
+        	list[i].g.clear();
+        	list[i].g.beginFill(list[i].color, 1);    	
+			list[i].g.drawCircle(list[i].x,list[i].y,5);
+			list[i].g.endFill();
+        }
+ 		// render the stage   
+		renderer.render(stage);
     }
 
     </script>
