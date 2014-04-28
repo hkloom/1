@@ -7,6 +7,7 @@
             margin: 0;
             padding: 0;
             background-color: #000000;
+            text-align: center;
         }
     </style>
     <script src="/js/pixi.js"></script>
@@ -18,13 +19,19 @@
     var stage = new PIXI.Stage(0x66FF99);
  
     // create a renderer instance.
-    var renderer = PIXI.autoDetectRenderer(400, 300);
+    var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
  
     // add the renderer view element to the DOM
     document.body.appendChild(renderer.view);
  
     requestAnimFrame( animate );
- 
+
+	var graphics = new PIXI.Graphics();
+	graphics.beginFill(0xFF700B, 1);
+	graphics.drawCircle(470, 200,100);
+	graphics.endFill();	
+	stage.addChild(graphics);
+	
     function animate() {
  
         requestAnimFrame( animate );
@@ -32,7 +39,7 @@
         // render the stage   
         renderer.render(stage);
     }
-    
+
     </script>
  
     </body>
