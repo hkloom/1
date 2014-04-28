@@ -1,56 +1,109 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>pixi.js example 1</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            text-align: center;
-        }
-    </style>
-    <script src="/js/pixi.js"></script>
+	<title>pixi.js example 8 Dragging</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #FFFFFF;
+
+		}
+	</style>
+	<script src="/js/pixi.dev.js"></script>
 </head>
 <body>
-    <script>
- 
-    // create an new instance of a pixi stage
-    var stage = new PIXI.Stage(0xFFFFFF);
- 
-    // create a renderer instance.
-    var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
- 
-    // add the renderer view element to the DOM
-    document.body.appendChild(renderer.view);
- 
-    var list = [];
-    for(var k = 0; k < 100; k++){
-    	list[k] = {x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, color:(Math.random()*0xFFFFFF<<0), g: new PIXI.Graphics()};
-		list[k].g.beginFill(list[k].color, 1);    	
-		list[k].g.drawCircle(list[k].x,list[k].y,5);
-		list[k].g.endFill();
-		stage.addChild(list[k].g);
-    }
+	<script>
+	// create an new instance of a pixi stage
+	var stage = new PIXI.Stage(0x97C56E, true);
 
-    requestAnimFrame( animate );
+	// create a renderer instance
+	var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, null);
 
-    function animate() {
- 
-        requestAnimFrame( animate );
-        for (var i = 0; i < list.length; i++){
-        	list[i].x += 2;
-        	list[i].y += 3;
-        	list[i].g.clear();
-        	list[i].g.beginFill(list[i].color, 1);    	
-			list[i].g.drawCircle(list[i].x,list[i].y,5);
-			list[i].g.endFill();
-        }
- 		// render the stage   
-		renderer.render(stage);
-    }
+	// add the renderer view element to the DOM
+	document.body.appendChild(renderer.view);
+	renderer.view.style.position = "absolute";
+	renderer.view.style.top = "0px";
+	renderer.view.style.left = "0px";
+	requestAnimFrame( animate );
 
-    </script>
- 
-    </body>
+	// create a texture from an image path
+	var texture = PIXI.Texture.fromImage("dick.png");
+
+	for (var i = 0; i < 10; i++)
+	{
+		createBunny(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+	};
+
+
+	function createBunny(x, y)
+	{
+		// create our little bunny friend..
+		var bunny = new PIXI.Sprite(texture);
+
+		// enable the bunny to be interactive.. this will allow it to respond to mouse and touch events
+		bunny.interactive = true;
+		// this button mode will mean the hand cursor appears when you rollover the bunny with your mouse
+		bunny.buttonMode = true;
+
+		// center the bunnys anchor point
+		bunny.anchor.x = 0.5;
+		bunny.anchor.y = 0.5;
+		// make it a bit bigger, so its easier to touch
+		bunny.scale.x = bunny.scale.y = 3;
+
+
+		// use the mousedown and touchstart
+		bunny.mousedown = bunny.touchstart = function(data)
+		{
+			// stop the default event...
+			data.originalEvent.preventDefault();
+
+			// store a reference to the data
+			// The reason for this is because of multitouch
+			// we want to track the movement of this particular touch
+			this.data = data;
+			this.alpha = 0.9;
+			this.dragging = true;
+		};
+
+		// set the events for when the mouse is released or a touch is released
+		bunny.mouseup = bunny.mouseupoutside = bunny.touchend = bunny.touchendoutside = function(data)
+		{
+			this.alpha = 1
+			this.dragging = false;
+			// set the interaction data to null
+			this.data = null;
+		};
+
+		// set the callbacks for when the mouse or a touch moves
+		bunny.mousemove = bunny.touchmove = function(data)
+		{
+			if(this.dragging)
+			{
+				var newPosition = this.data.getLocalPosition(this.parent);
+				this.position.x = newPosition.x;
+				this.position.y = newPosition.y;
+			}
+		}
+
+		// move the sprite to its designated position
+		bunny.position.x = x;
+		bunny.position.y = y;
+
+		// add it to the stage
+		stage.addChild(bunny);
+	}
+
+	function animate() {
+
+	    requestAnimFrame(animate);
+
+	    // render the stage
+	    renderer.render(stage);
+	}
+
+	</script>
+
+	</body>
 </html>
