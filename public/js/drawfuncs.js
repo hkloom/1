@@ -7,7 +7,7 @@ function sqrt(x){ return Math.sqrt(x); }
 function sinh(x){ return (exp(x)-exp(-x))/2; }
 function cosh(x){ return (exp(x)+exp(-x))/2; }
 
-function draw(colors){
+function draw(cols){
 	  console.log("drawing");
       var dx = new Function('x','y', 'return '+document.getElementById("dx").value+';');
       var dy = new Function('x','y', 'return '+document.getElementById("dy").value+';');
@@ -18,8 +18,8 @@ function draw(colors){
       ctx.fillRect(0,0,c.width,c.height,1);
       ctx.globalAlpha=1.0;
       ctx.fillStyle="#000000";
-      for (var k =0; k<=colors.length; k++){
-        ctx.fillStyle=colors[k];
+      for (var k =0; k<=cols.length; k++){
+        ctx.fillStyle=cols[k];
         for (var j = 0; j < 200; j++){
           var x = Math.random()*5;
           var y = Math.random()*5;
@@ -30,4 +30,12 @@ function draw(colors){
           }
         }
       }
+    }
+  
+function getcolors(){
+  var c = [];
+  for (var i=0; i<colors.length;i++){
+    c.push(document.getElementById("color"+i).value);
   }
+  return c;
+}

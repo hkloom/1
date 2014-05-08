@@ -21,7 +21,7 @@
 
 	console.log("colors = "+colors);
 	console.log(json);
-	console.log(colors.split(','));
+	//console.log(colors.split(','));
 </script>
 </head>
 <body>
@@ -71,7 +71,9 @@
 		$("#draw").click(function(e){
 			console.log("draw");
 			e.preventDefault();
-			draw(colors);
+			var cc = getcolors();
+			console.log(cc);
+			draw(cc);
 		});
 	});
 
