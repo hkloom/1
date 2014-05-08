@@ -28,6 +28,8 @@
 		//get the data
 		var json = <%- JSON.stringify(items) %>;
 		//$(".inside").append("items = "+json.toString());
+		console.log(json);
+		
 		for (var i = 0; i< Math.min(9,json.length); i++){
 			if (i%3==0){ //start row
 				$(".table").append("<div class = 'row'>");

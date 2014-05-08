@@ -4,7 +4,6 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/drawfuncs.js"></script>
 
-
 <head>
 	<title><%= title %></title>
 	
@@ -15,10 +14,14 @@
 
 <script>
 	//get the data
-	var json = <%- JSON.stringify(system) %>;
-	var Colors = <%- JSON.stringify(system.colors) %>;
+	json = <%- JSON.stringify(system) %>;
+	_colors = json.colors;//<%- JSON.stringify(system.colors) %>
+	colors = _colors.split(',');
+	//colors2 = JSON.parse('{colors: ['+JSON.stringify(colors)+']}');
+
+	console.log("colors = "+colors);
 	console.log(json);
-	console.log(Colors);
+	console.log(colors.split(','));
 </script>
 </head>
 <body>
@@ -35,18 +38,18 @@
 		<input id = "dy" type = "text" class = "equation" value = "<%= system.dy %>">
 		</br>
 		<script>
-			//console.log("colors = "+json.colors+"\nlength = "+json.colors.length);
 			//var colors = JSON.parse(json.colors);
 			//console.log("colors = "+colors+"\nlength = "+colors.length);
 			s = "";
-			for (var i=0; i<5;i++){//json.colors.length;i++){
-				s += '<input class="color"  value = "#000000" id = "color'+i+'">';
+			for (var i=0; i<colors.length;i++){//json.colors.length;i++){
+				s += '<input class="color"  value = "'+colors[i]+'" id = "color'+i+'">';
 			}
 			document.write(s);
 		</script>
 		</br>
 		</br>
-		<input type = "submit" value = "+++++++++++++++++++++++++++++++++++" id = "draw">
+		<input type = "submit" value = "SAVE" id = "save">
+		<input type = "submit" value = "DRAW" id = "draw">
 	</form>
 </div>
 <script>
@@ -61,14 +64,43 @@
 	var ctx = canvas.getContext('2d');
 	ctx.beginPath();
 	ctx.fillStyle = "#FFFFFF";
-	ctx.rect(0,0,650,650);
+	ctx.rect(0,0,canvas.width,canvas.height);
 	ctx.fill();
 
 	$(function(){
 		$("#draw").click(function(e){
-			console.log("click");
+			console.log("draw");
 			e.preventDefault();
-			draw();
+			draw(colors);
+		});
+	});
+
+	$(function(){
+		$("#save").click(function(e){
+			console.log("save");
+			e.preventDefault();
+			var system = {
+				title: "Untitled",
+				dx: "sin(3*y)",
+				dy: "-sin(5*x)",
+				colors: ["#6BDB40", "#7140DB", "#3D3618","#4A479E", "#0B2E03"]
+			};
+			$.ajax({
+            	type: 'POST',
+            	data: system,
+            	url: '/save',
+            	dataType: 'JSON'
+        	}).done(function( response ) {
+            // Check for successful (blank) response
+            if (response.msg === '') {
+            	console.log("save successful");
+            }
+            else {
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+
+            }
+        });
 		});
 	});
 

@@ -16,7 +16,7 @@ app.use(bp());
 app.route('/')
 .get( function(req,res){
     console.log("on index page");
-  	df.find({title: "my masterpiece"},{title:1,dx:1,dy:1,colors:1},function(items){
+  	df.find({title: "Untitled"},{title:1,dx:1,dy:1,colors:1},function(items){
   		res.render("index.html",
   			{	
   				title: "VIEW",
@@ -28,7 +28,7 @@ app.route('/')
 
 app.route('/edit')
 .post( function(req,res){
-    console.log("Unserialized request: " + JSON.stringify(req.body, null, 4));
+    console.log("Unserialized request: " + JSON.stringify(req.body));
     console.log("on edit page");
       res.render("system.html",
         { 
@@ -37,6 +37,11 @@ app.route('/edit')
         }
       );
     });
+
+app.route('/save')
+.post( function(req,res){
+  df.add(req.body);
+});
 
 app.route('/dicks')
 .get( function(req,res){

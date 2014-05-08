@@ -30,7 +30,7 @@
 	// create a texture from an image path
 	var texture = PIXI.Texture.fromImage("dick.png");
 
-	for (var i = 0; i < 100; i++)
+	for (var i = 0; i < 1000; i++)
 	{
 		createBunny(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
 	};
@@ -85,6 +85,8 @@
 				this.position.x = newPosition.x;
 				this.position.y = newPosition.y;
 			}
+
+			this.rotation += 0.01;
 		}
 
 		// move the sprite to its designated position
